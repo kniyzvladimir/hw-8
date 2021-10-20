@@ -6,7 +6,7 @@ public class MyArrayList <E> {
     private E [] array;
 
     public int getCapacity() {
-        return capacity;
+        return array.length;
     }
 
     public MyArrayList (){
@@ -19,16 +19,6 @@ public class MyArrayList <E> {
         array = (E []) new Object[capacity];
     }
 
-    @Override
-    public String toString() {
-        int size = size();
-        if (size == 0) {
-            return "[]";
-        }
-        array = Arrays.copyOf(array, size());
-        return Arrays.toString(array);
-
-    }
 
     public int size () {
         int size = 0;
@@ -54,7 +44,44 @@ public class MyArrayList <E> {
     }
 
     public void clear () {
-        this.array = (E []) new Object[10];
+        this.array = (E []) new Object[getCapacity()];
+    }
+
+    public E get (int index) {
+        if (index >= size())
+            throw new IndexOutOfBoundsException("Индекс превышает размер объекта MyArrayList");
+        return array[index];
+    }
+
+    public void remove (int index) {
+        if (index >= size())
+            throw new IndexOutOfBoundsException("Индекс превышает размер объекта MyArrayList");
+        int size = size();
+        for (int i = index; i < size; i++) {
+            array[i] = array[i+1];
+        }
+
+
+    }
+
+    @Override
+    public String toString() {
+        int size = size();
+        if (size == 0) {
+            return "[]";
+        }
+        StringBuilder arrayToString = new StringBuilder(size);
+        arrayToString.append("[");
+        for (int i= 0; i < size; i++) {
+            if (i == size-1) {
+                arrayToString.append(array[i]);
+            } else {
+                arrayToString.append(array[i]).append(", ");
+            }
+        }
+        arrayToString.append("]");
+        return new String(arrayToString);
+
     }
 
 }
