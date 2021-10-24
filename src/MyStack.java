@@ -1,15 +1,15 @@
-public class MyQueue<E> {
+public class MyStack<E> {
     private int size;
-    private MyQueue.Node<E> first;
+    private MyStack.Node<E> first;
 
-    private MyQueue.Node<E> last;
+    private MyStack.Node<E> last;
 
     private static class Node<E> {
         E item;
-        MyQueue.Node<E> next;
-        MyQueue.Node<E> prev;
+        MyStack.Node<E> next;
+        MyStack.Node<E> prev;
 
-        public Node(E item, MyQueue.Node<E> next, MyQueue.Node<E> prev) {
+        public Node(E item, MyStack.Node<E> next, MyStack.Node<E> prev) {
             this.item = item;
             this.next = next;
             this.prev = prev;
@@ -21,9 +21,9 @@ public class MyQueue<E> {
         }
     }
 
-    public void add(E value) {
-        MyQueue.Node<E> l = this.last;
-        MyQueue.Node<E> newNode = new MyQueue.Node<>(value, null, l);
+    public void push(E value) {
+        MyStack.Node<E> l = this.last;
+        MyStack.Node<E> newNode = new MyStack.Node<>(value, null, l);
         this.last = newNode;
         if (l == null) {
             this.first = newNode;
@@ -37,9 +37,9 @@ public class MyQueue<E> {
         if (index >= size || index < 0) {
             throw new IndexOutOfBoundsException();
         }
-        MyQueue.Node<E> prevForRemove = null;
-        MyQueue.Node<E> nextForRemove = null;
-        MyQueue.Node<E> forSearching = first;
+        MyStack.Node<E> prevForRemove = null;
+        MyStack.Node<E> nextForRemove = null;
+        MyStack.Node<E> forSearching = first;
 
         if (index == 0) {
             this.first = forSearching.next;
@@ -78,20 +78,20 @@ public class MyQueue<E> {
         return this.size;
     }
 
-    public MyQueue.Node<E> peek() {
-        return this.first;
+    public MyStack.Node<E> peek() {
+        return this.last;
     }
 
-    public MyQueue.Node<E> poll() {
+    public MyStack.Node<E> pop() {
         if (size == 0) {
             return null;
         }
-        MyQueue.Node<E> newFirst = this.first.next;
-        MyQueue.Node<E> removable = this.first;
-        this.first = newFirst;
+        MyStack.Node<E> newLast = this.last.prev;
+        MyStack.Node<E> removable = this.last;
+        this.last = newLast;
         size--;
         if (size == 0) {
-            this.last = null;
+            this.first = null;
         }
         return removable;
     }
@@ -99,23 +99,23 @@ public class MyQueue<E> {
     @Override
     public String toString() {
         if (size == 00 && this.first == null && this.last == null) {
-            return "[This MyQueue is clear!]";
+            return "[This MyStack is clear!]";
         }
-        StringBuilder MyQueueToString = new StringBuilder();
-        MyQueueToString.append("[");
-        MyQueue.Node<E> l = this.first;
+        StringBuilder MyStackToString = new StringBuilder();
+        MyStackToString.append("[");
+        MyStack.Node<E> l = this.first;
         int count = 0;
         while (count < size) {
             if (count == size - 1) {
-                MyQueueToString.append(l);
+                MyStackToString.append(l);
                 count++;
             } else {
-                MyQueueToString.append(l).append("; ");
+                MyStackToString.append(l).append("; ");
                 l = l.next;
                 count++;
             }
         }
-        MyQueueToString.append("]");
-        return new String(MyQueueToString);
+        MyStackToString.append("]");
+        return new String(MyStackToString);
     }
 }

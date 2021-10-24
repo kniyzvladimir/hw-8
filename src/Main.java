@@ -1,34 +1,21 @@
 public class Main {
     public static void main(String[] args) {
-        MyArrayList<String> mal = new MyArrayList<>(10);
-        MyLinkedList <String> mll = new MyLinkedList<>();
+        MyStack <String> ms = new MyStack<>();
 
-        mll.add("00");
-        mll.add("10");
-        mll.add("20");
-        mll.add("30");
-        mll.add("40");
-        mll.add("50");
-        mll.add("60");
-        System.out.println(mll);
+        ms.push("00");
+        ms.push("10");
+        ms.push("20");
+        ms.push("30");
+        ms.push("40");
+        ms.push("50");
+        ms.push("60");
+        System.out.println(ms);
 
-        System.out.println(mll.size());
-        System.out.println(mll.get(4));
+        System.out.println(ms.size());
 
-        mll.remove(5);
-        System.out.println(mll);
-        mll.remove(4);
-        System.out.println(mll);
-        mll.remove(3);
-        System.out.println(mll);
-        mll.remove(2);
-        System.out.println(mll);
-        mll.remove(1);
-        System.out.println(mll);
-        mll.remove(0);
-        System.out.println(mll);
-        mll.remove(0);
-        System.out.println(mll);
-
+        ms.remove(0);
+        System.out.println(ms.pop());
+        System.out.println(ms.peek());
+        System.out.println(ms);
     }
 }
